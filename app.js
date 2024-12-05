@@ -11,13 +11,13 @@ const discord = new discordServer();
 discord.onWSMessageCreate = async function(message) {
     //if(message.channel.name !== 'test') return;
 
-    // const response = await axios.get("https://weidian.com/item.html?itemID=7267596927");
-    // //console.log(response.data);return;
+    // const response = await axios.get("https://weidian.com/item.html?itemID=7261877317");
+    // //console.log(response.data);
     // //fs.writeFileSync('weidian.html', response.data);return;
     // const $ = cheerio.load(response.data);
     // //const data_obj = $('#__rocker-render-inject__').attr('data-obj');
     // const data_obj = JSON.parse($('#__rocker-render-inject__').attr('data-obj'));
-    // //fs.writeFileSync('weidian_data_obj_default_model.html', data_obj);
+    // //fs.writeFileSync('weidian_data_obj.html', data_obj);
     // const shop_name =data_obj.result.default_model.shop_info.shopName;
     // const shop_url = data_obj.result.default_model.shop_info.shop_url;
     // console.log("shop_name:"+shop_name);

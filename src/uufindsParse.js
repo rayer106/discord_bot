@@ -208,6 +208,13 @@ export class uufindsParse {
                 if(!data_obj) {
                     throw new Error('data_obj is null');
                 }
+                const sold_text = data_obj.result.default_model.item_info.soldText;
+                if(sold_text) {
+                    const soldNum = sold_text.match(/\d+/);
+                    if (soldNum) {
+                        goods.provider_bought = soldNum[0];
+                    }
+                }
                 const shop_id = data_obj.result.default_model.shop_info.shop_id;
                 const shop_name =data_obj.result.default_model.shop_info.shopName;
                 const shop_url = data_obj.result.default_model.shop_info.shop_url;
