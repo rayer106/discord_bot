@@ -9,7 +9,7 @@ import fs from 'fs';
 
 const discord = new discordServer();
 discord.onWSMessageCreate = async function(message) {
-    if(message.channel.name !== 'test') return;
+    //if(message.channel.name !== 'test') return;
 
     // const response = await axios.get("https://weidian.com/item.html?itemID=7267596927");
     // //console.log(response.data);return;
@@ -40,7 +40,7 @@ discord.onWSMessageCreate = async function(message) {
     const uufinds = new uufindsParse();
     uufinds.parse(uri, async (_ret) => {
         if(!_ret || !_ret.goods) {
-            console.log("parse failed");
+            console.error("parse failed");
             return;
         }
         const msg = goodsMessage(_ret);
@@ -118,20 +118,25 @@ function goodsMessage(msg){
     // msg = {
     //     "goods": {
     //         "name": "XXX商品名字，要翻译成英文XXX",
+    //         "rawUri": "https://weidian.com/item.html?itemID=商品ID",
     //         "image": "https://images.pexels.com/photos/1308881/pexels-photo-1308881.jpeg?cs=srgb&dl=pexels-soldiervip-1308881.jpg&fm=jpg",
     //         "price": "$20.25",
     //         "provider_name": "微店名字",
-    //         "provider_shop_link": "https://weidian.com/item.html?itemID=商品ID",
+    //         "provider_link": "https://weidian.com/item.html?itemID=商品ID",
     //         "provider_level": "10",
     //         "provider_bought": "10",
     //         "qc_photo_num": "20",
     //         "qc_uufinds_link": "https://uufind.macmillan.com.tw/iii/encore/record/C__I10",
+    //         "qc_image_list": [
+    //             "https://images.pexels.com/photos/1308881/pexels-photo-1308881.jpeg?cs=srgb&dl=pexels-soldiervip-1308881.jpg&fm=jpg",
+    //             "https://images.pexels.com/photos/1308881/pexels-photo-1308881.jpeg?cs=srgb&dl=pexels-soldiervip-1308881.jpg&fm=jpg",
+    //         ],
     //         "buy_name": "CNFans",
     //         "buy_link": "https://example.com/buy"
     //     }
     // };
     
-    console.log(msg);
+    console.log("return msg:", msg);
     const embed = new EmbedBuilder()
         .setColor('#0099ff')
         .setTitle('CNFans: BatmanQC-Help you get QC photos')

@@ -86,7 +86,7 @@ export function getUUFindsToken() {
     try {
         //const config = await readConfig(fileURL); // 从根目录读取配置文件
         //console.log("配置内容:", config); // 输出配置内容
-        console.log("配置内容1:", uufindsConfig); // 输出配置内容
+        //console.log("配置内容1:", uufindsConfig); // 输出配置内容
         const config = updateApiKeysCount();
         writeConfig();
         return config;
