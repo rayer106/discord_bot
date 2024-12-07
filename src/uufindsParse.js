@@ -15,7 +15,7 @@ export class uufindsParse {
         ['weidian', this.weidianTemplate],
         ['taobao', this.taobaoTemplate],
         ['ali_1688', this.ali1688Template],
-        ['tmall', this.mapCNFansShopType],
+        //['tmall', this.mapCNFansShopType],
     ]);
     hostProcessors = {
         'cnfans.com': this.processCNFans.bind(this),
@@ -23,12 +23,9 @@ export class uufindsParse {
         //'hoobuy.com': this.processHoobuy.bind(this),
         //'oopbuy.com': this.processOopbuy.bind(this),
         // Add more hosts here as necessary
-    };
-    domesticHostProcessors = {
         'weidian.com': this.processWeidian.bind(this),
-        'item.taobao.com': this.processTaobao.bind(this),
-        'detail.1688.com': this.processAli1688.bind(this),
-        'm.1688.com': this.processAli1688.bind(this),
+        'taobao.com': this.processTaobao.bind(this),
+        '1688.com': this.processAli1688.bind(this),
         //'tmall.com': this.processTmall.bind(this),
     };
     platformName = {
@@ -37,16 +34,14 @@ export class uufindsParse {
         'hoobuy.com': 'Hoobuy',
         'oopbuy.com': 'Oopbuy',
         'weidian.com': 'Weidian',
-        'item.taobao.com': 'Taobao',
-        'detail.1688.com': 'Ali1688',
-        'm.1688.com': 'Ali1688',
+        'taobao.com': 'Taobao',
+        '1688.com': 'Ali1688',
         //'tmall.com': 'Tmall',
     };
     platformTemplate = {
         'weidian.com': this.weidianTemplate,
-        'item.taobao.com': this.taobaoTemplate,
-        'detail.1688.com': this.ali1688Template,
-        'm.1688.com': this.ali1688Template,
+        'taobao.com': this.taobaoTemplate,
+        '1688.com': this.ali1688Template,
         //'tmall.com': 'Tmall',
     };
 
@@ -56,6 +51,7 @@ export class uufindsParse {
 
     async parse(rawUri, callback) {
         try {
+            rawUri.__rootHost = this.getRootHost(rawUri);
             const axiosHeader = this.getAxiosConfig();
             const requestUri = this.getUUFindsUri(rawUri);
             console.log("requestUri:", requestUri);
@@ -64,6 +60,12 @@ export class uufindsParse {
         } catch (error) {
             console.error('Error fetching the page:', error.message);
         }
+    }
+    
+    getRootHost(rawUri) {
+        const hostParts = rawUri.host.split('.');
+        const rootHost = hostParts.slice(-2).join('.');
+        return rootHost;
     }
     
     getAxiosConfig() {
@@ -87,20 +89,12 @@ export class uufindsParse {
 
     // Generate the URI data based on input
     getUUFindsUri(rawUri) {
-        const processor = this.hostProcessors[rawUri.host];
-        const domesticProcessor = this.domesticHostProcessors[rawUri.host];
-        if (!processor && !domesticProcessor) {
-            throw new Error('No processor for host:'+ rawUri.host);
+        const processor = this.hostProcessors[rawUri.__rootHost];
+        if (!processor) {
+            throw new Error('No processor for host:'+ rootHost);
         }
 
-        let uufindsSearchLink = "";
-        if(processor) {
-            uufindsSearchLink = processor(rawUri);
-        } else {
-            uufindsSearchLink = domesticProcessor(rawUri);
-        }
-
-        return util.format(this.uufindUrl, encodeURIComponent(uufindsSearchLink));
+        return util.format(this.uufindUrl, encodeURIComponent(processor(rawUri)));
     }
 
     // Process requests for CNFans and Joyabuy
@@ -130,7 +124,7 @@ export class uufindsParse {
     processWeidian(rawUri) {
         const itemId = rawUri.searchParams.get('itemID');
         if(itemId) {
-            const tmplate = this.platformTemplate[rawUri.host];
+            const tmplate = this.platformTemplate[rawUri.__rootHost];
             return util.format(tmplate, itemId);
         } else {
             throw new Error(`Invalid item ID for Weidian:itemID=${itemId}`);
@@ -140,7 +134,7 @@ export class uufindsParse {
     processTaobao(rawUri) {
         const id = rawUri.searchParams.get('id');
         if(id) {
-            const tmplate = this.platformTemplate[rawUri.host];
+            const tmplate = this.platformTemplate[rawUri.__rootHost];
             return util.format(tmplate, id);
         } else {
             throw new Error(`Invalid ID for Taobao:id=${id}`);
@@ -152,7 +146,7 @@ export class uufindsParse {
         if (match) {
             const id = match[1];
             if(id) {
-                const tmplate = this.platformTemplate[rawUri.host];
+                const tmplate = this.platformTemplate[rawUri.__rootHost];
                 return util.format(tmplate, id);
             } else {
                 throw new Error(`Invalid ID for 1688:id=${id}`);
@@ -196,7 +190,7 @@ export class uufindsParse {
             "qc_uufinds_link": util.format(this.uufindQC, goodsData.id),//uufinds的链接
             "qc_image_list": goodsData.qcImageList,
         }
-        goods.buy_name = this.platformName[rawUri.host];//供应商的名称，cnfans或者其他
+        goods.buy_name = this.platformName[rawUri.__rootHost];//供应商的名称，cnfans或者其他
         goods.buy_link = rawUri.href;//供应商的购买链接
 
         if(goodsData.channel === 'weidian') {

@@ -1,11 +1,11 @@
 export const uufindsConfig = {
-    "date": "2024-12-05",
+    "date": "2024-12-07",
     "keys": [
         {
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM0MzcwNTAsInVzZXJuYW1lIjoic29tZW9uZTEzMTkifQ.FDyIoxKg9mTVQ0DbCfOlAaCvpbJGBJohNqjoJ2LVty4": 30
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM0MzcwNTAsInVzZXJuYW1lIjoic29tZW9uZTEzMTkifQ.FDyIoxKg9mTVQ0DbCfOlAaCvpbJGBJohNqjoJ2LVty4": 2
         },
         {
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM2MjA0MDAsInVzZXJuYW1lIjoiY3J5YW40MTMxOUBvdXRsb29rLmNvbSJ9.fSnOkP70FUtDOMr1U2P7ymatGH8fwLW5qTuOTQP_1QA": 8
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM2MjA0MDAsInVzZXJuYW1lIjoiY3J5YW40MTMxOUBvdXRsb29rLmNvbSJ9.fSnOkP70FUtDOMr1U2P7ymatGH8fwLW5qTuOTQP_1QA": 0
         },
         {
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM2ODYxNzIsInVzZXJuYW1lIjoibml1aG9uZ2ZlaXd2QDE2My5jb20ifQ._BF96ejp45xqD8Rn2sq026FxMd7azAUlrOK9A-6TY_k": 0
