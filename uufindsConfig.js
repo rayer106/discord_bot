@@ -1,8 +1,8 @@
 export const uufindsConfig = {
-    "date": "2024-12-07",
+    "date": "2024-12-08",
     "keys": [
         {
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM0MzcwNTAsInVzZXJuYW1lIjoic29tZW9uZTEzMTkifQ.FDyIoxKg9mTVQ0DbCfOlAaCvpbJGBJohNqjoJ2LVty4": 2
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM0MzcwNTAsInVzZXJuYW1lIjoic29tZW9uZTEzMTkifQ.FDyIoxKg9mTVQ0DbCfOlAaCvpbJGBJohNqjoJ2LVty4": 1
         },
         {
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM2MjA0MDAsInVzZXJuYW1lIjoiY3J5YW40MTMxOUBvdXRsb29rLmNvbSJ9.fSnOkP70FUtDOMr1U2P7ymatGH8fwLW5qTuOTQP_1QA": 0
